@@ -12,4 +12,3 @@ set -e
 #   5: invalid file hash
 #   9: superuser required
 
-

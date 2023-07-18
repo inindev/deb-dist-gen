@@ -18,7 +18,7 @@ main() {
         exit 0
     fi
 
-    check_installed 'u-boot-tools' 'wget' 'xz-utils'
+    check_installed 'wget' 'xz-utils'
 
     if [ -f "$media" ]; then
         read -p "file $media exists, overwrite? <y/N> " yn

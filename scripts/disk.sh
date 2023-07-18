@@ -41,7 +41,6 @@ mount_media() {
     local partnum="1"
 
     if [ -d "$mountpt" ]; then
-        echo "cleaning up mount points..."
         mountpoint -q "$mountpt/var/cache" && umount "$mountpt/var/cache"
         mountpoint -q "$mountpt/var/lib/apt/lists" && umount "$mountpt/var/lib/apt/lists"
         mountpoint -q "$mountpt" && umount "$mountpt"
