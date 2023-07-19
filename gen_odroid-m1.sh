@@ -17,6 +17,7 @@ main() {
     local outdir='target_odroid-m1'
     local outfile="$outdir/make_debian_img.sh"
 
+    echo "generating $outdir"
     rm -rf "$outdir"
     mkdir -p "$outdir/files"
 

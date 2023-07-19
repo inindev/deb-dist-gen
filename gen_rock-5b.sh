@@ -17,6 +17,7 @@ main() {
     local outdir='target_rock-5b'
     local outfile="$outdir/make_debian_img.sh"
 
+    echo "generating $outdir"
     rm -rf "$outdir"
     mkdir -p "$outdir/files"
 
