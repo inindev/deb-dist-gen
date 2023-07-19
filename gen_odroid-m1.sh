@@ -20,7 +20,7 @@ main() {
     rm -rf "$outdir"
     mkdir -p "$outdir/files"
 
-    local scripts='header main disk file_fstab file_apt_sources download is_param check_installed text root_check footer'
+    local scripts='header main disk file_fstab file_apt_sources file_wpa_supplicant_conf file_locale_cfg download is_param check_installed text root_check footer'
     for script in $scripts; do
         cat "scripts/$script.sh" >> "$outfile"
     done
