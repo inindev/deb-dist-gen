@@ -1,4 +1,4 @@
-# check if utility program is installed
+# check if debian package is installed
 check_installed() {
     local todo
     for item in "$@"; do
