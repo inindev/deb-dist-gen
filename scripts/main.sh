@@ -114,7 +114,8 @@ main() {
     print_hdr "installing firmware"
     mkdir -p "$mountpt/lib/firmware"
     local lfwn=$(basename "$lfw")
-    tar -C "$mountpt/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" "${lfwn%%.*}/rockchip" "${lfwn%%.*}/rtl_bt" "${lfwn%%.*}/rtl_nic"
+    local lfwbn="${lfwn%%.*}"
+    tar -C "$mountpt/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" <FIRMWARE>
 
     # apt sources & default locale
     echo "$(file_apt_sources $deb_dist)\n" > "$mountpt/etc/apt/sources.list"

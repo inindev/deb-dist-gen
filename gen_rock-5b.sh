@@ -7,14 +7,14 @@ set -e
 
 main() {
     local params='
-      DEB_DIST: bookworm
-      HOSTNAME: odroidm1-arm64
-      DTB_FILE: rk3568-odroid-m1.dtb
-      REL_URL:  https://github.com/inindev/odroid-m1/releases/download/v12.0
-      FIRMWARE: rockchip rtl_bt rtl_nic
+      DEB_DIST: trixie
+      HOSTNAME: rock5b-arm64
+      DTB_FILE: rk3588-rock-5b.dtb
+      REL_URL:  https://github.com/inindev/rock-5b/releases/download/v12.0-6.5-rc1
+      FIRMWARE: mscc* tegra??? r8a779x* rockchip rtl_bt rtl_nic
     '
 
-    local outdir='target_odroid-m1'
+    local outdir='target_rock-5b'
     local outfile="$outdir/make_debian_img.sh"
 
     rm -rf "$outdir"
@@ -28,6 +28,9 @@ main() {
     cp files/* "$outdir/files"
 
     process_params "$params" "$outfile"
+
+    # remove the kernel by substituting it with initramfs-tools
+    sed -i 's/linux-image-arm64/initramfs-tools/' "$outfile"
 }
 
 process_params() {
