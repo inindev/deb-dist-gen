@@ -137,7 +137,7 @@ main() {
     (umask 377 && echo "$acct_uid ALL=(ALL) NOPASSWD: ALL" > "$mountpt/etc/sudoers.d/$acct_uid")
 
     print_hdr "installing rootfs expansion script to /etc/rc.local"
-    install -m 754 'files/rc.local' "$mountpt/etc"
+    install -Dm 754 'files/rc.local' "$mountpt/etc/rc.local"
 
     # disable sshd until after keys are regenerated on first boot
     rm -f "$mountpt/etc/systemd/system/sshd.service"
