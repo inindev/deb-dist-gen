@@ -59,7 +59,7 @@ process_dtb() {
     local outfile="$2"
 
     local outdir="$(dirname "$outfile")"
-    local files='dtb_copy dtb_rm mk_extlinux.sh'
+    local files='dtb_copy.sh dtb_rm.sh mk_extlinux.sh'
     for file in $files; do
         sed -i "s|<DTB_FILE>|$dtb_file|g" "$outdir/files/$file"
     done

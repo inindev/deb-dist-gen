@@ -87,12 +87,12 @@ main() {
     echo "$(file_fstab $uuid)\n" > "$mountpt/etc/fstab"
 
     # setup extlinux boot
-    install -Dm 754 'files/dtb_copy' "$mountpt/etc/kernel/postinst.d/dtb_copy"
-    install -Dm 754 'files/dtb_rm' "$mountpt/etc/kernel/postrm.d/dtb_rm"
+    install -Dm 754 'files/dtb_copy.sh' "$mountpt/etc/kernel/postinst.d/dtb_copy.sh"
+    install -Dm 754 'files/dtb_rm.sh' "$mountpt/etc/kernel/postrm.d/dtb_rm.sh"
     install -Dm 754 'files/mk_extlinux.sh' "$mountpt/boot/mk_extlinux.sh"
     $disable_ipv6 || sed -i 's/ ipv6.disable=1//' "$mountpt/boot/mk_extlinux.sh"
-    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postinst.d/update_extlinux"
-    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postrm.d/update_extlinux"
+    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postinst.d/update_extlinux.sh"
+    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postrm.d/update_extlinux.sh"
 
     # install debian linux from deb packages (debootstrap)
     print_hdr "installing root filesystem from debian.org"
