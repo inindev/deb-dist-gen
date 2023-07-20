@@ -41,28 +41,19 @@ main() {
 
     print_hdr "downloading files"
     local cache="cache.$deb_dist"
+
     # linux firmware
     local lfw=$(download "$cache" 'https://mirrors.edge.kernel.org/pub/linux/kernel/firmware/linux-firmware-20230210.tar.xz')
     local lfwsha='6e3d9e8d52cffc4ec0dbe8533a8445328e0524a20f159a5b61c2706f983ce38a'
+    [ "$lfwsha" = $(sha256sum "$lfw" | cut -c1-64) ] || { echo "invalid hash for $lfw"; exit 5; }
+
     # u-boot
     local uboot_spl=$(download "$cache" '<REL_URL>/idbloader.img')
+    [ -f "$uboot_spl" ] || { echo "unable to fetch $uboot_spl"; exit 4; }
     local uboot_itb=$(download "$cache" '<REL_URL>/u-boot.itb')
+    [ -f "$uboot_itb" ] || { echo "unable to fetch: $uboot_itb"; exit 4; }
 
-    if [ "$lfwsha" != $(sha256sum "$lfw" | cut -c1-64) ]; then
-        echo "invalid hash for linux firmware: $lfw"
-        exit 5
-    fi
-
-    if [ ! -f "$uboot_spl" ]; then
-        echo "unable to fetch uboot binary: $uboot_spl"
-        exit 4
-    fi
-
-    if [ ! -f "$uboot_itb" ]; then
-        echo "unable to fetch uboot binary: $uboot_itb"
-        exit 4
-    fi
-
+    # setup media
     if [ ! -b "$media" ]; then
         print_hdr "creating image file"
         make_image_file "$media"
