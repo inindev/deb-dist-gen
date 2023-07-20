@@ -65,6 +65,7 @@ main() {
     print_hdr "formatting media"
     format_media "$media"
 
+    print_hdr "mounting media"
     mount_media "$media"
 
     print_hdr "configuring files"
