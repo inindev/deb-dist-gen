@@ -41,7 +41,7 @@ main_model() {
 
     # device tree is not in kernel
     sed -i "/setup media/i\    # dtb\n    local dtb=\$(download \"\$cache\" \"\<REL_URL\>/rk3568-nanopi-${model}.dtb\")\n    [ -f \"\$dtb\" ] || { echo \"unable to fetch \$dtb\"; exit 4; }\n" "$outfile"
-    sed -i '/setup extlinux boot/i\    # install device tree\n    install -Dm 644 \"\$dtb\" \"\$mountpt/boot/\$dtb\"\n' "$outfile"
+    sed -i '/linux from deb packages/i\    # install device tree\n    install -m 644 \"\$dtb\" \"\$mountpt/boot\"\n' "$outfile"
 
     process_params "$params" "$outfile"
 
