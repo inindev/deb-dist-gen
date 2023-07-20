@@ -79,7 +79,7 @@ main() {
     echo "$(file_fstab $uuid)\n" > "$mountpt/etc/fstab"
 
     # setup extlinux boot
-    install -Dm 754 'files/dtb_copy.sh' "$mountpt/etc/kernel/postinst.d/dtb_copy.sh"
+    install -Dm 754 'files/dtb_cp.sh' "$mountpt/etc/kernel/postinst.d/dtb_cp.sh"
     install -Dm 754 'files/dtb_rm.sh' "$mountpt/etc/kernel/postrm.d/dtb_rm.sh"
     install -Dm 754 'files/mk_extlinux.sh' "$mountpt/boot/mk_extlinux.sh"
     $disable_ipv6 || sed -i 's/ ipv6.disable=1//' "$mountpt/boot/mk_extlinux.sh"

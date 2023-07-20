@@ -26,7 +26,7 @@ main() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_copy.sh' 'files/dtb_rm.sh' 'files/mk_extlinux.sh' 'files/rc.local' "$outdir/files"
+    cp 'files/dtb_cp.sh' 'files/dtb_rm.sh' 'files/mk_extlinux.sh' 'files/rc.local' "$outdir/files"
 
     process_params "$params" "$outfile"
 
@@ -59,7 +59,7 @@ process_dtb() {
     local outfile="$2"
 
     local outdir="$(dirname "$outfile")"
-    local files='dtb_copy.sh dtb_rm.sh mk_extlinux.sh'
+    local files='dtb_cp.sh dtb_rm.sh mk_extlinux.sh'
     for file in $files; do
         sed -i "s|<DTB_FILE>|$dtb_file|g" "$outdir/files/$file"
     done
