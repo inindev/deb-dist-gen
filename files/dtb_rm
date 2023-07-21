@@ -11,10 +11,10 @@ target="/boot/<DTB_FILE>-${version}"
 
 # passing the kernel version is required
 if [ -z "${version}" ]; then
-	echo >&2 "dtb_rm.sh: ${DPKG_MAINTSCRIPT_PACKAGE:-kernel package} did not pass a version number"
+	echo >&2 "E: dtb_rm: ${DPKG_MAINTSCRIPT_PACKAGE:-kernel package} did not pass a version number"
 	exit 2
 fi
 
-echo "dtb_rm.sh: cleaning up ${target}"
+echo "I: dtb_rm: cleaning up ${target}"
 rm -f "${target}"
 

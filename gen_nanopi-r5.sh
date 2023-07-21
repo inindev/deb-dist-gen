@@ -34,7 +34,7 @@ main_model() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_cp.sh' 'files/dtb_rm.sh' 'files/mk_extlinux.sh' "$outdir/files"
+    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' "$outdir/files"
 
     # additional network config
     sed "/setup for expand fs/e cat files/network_${model}.cfg" 'files/rc.local' > "$outdir/files/rc.local-${model}"
@@ -76,7 +76,7 @@ process_dtb() {
     local outfile="$2"
 
     local outdir="$(dirname "$outfile")"
-    local files='dtb_cp.sh dtb_rm.sh mk_extlinux.sh'
+    local files='dtb_cp dtb_rm mk_extlinux'
     for file in $files; do
         sed -i "s|<DTB_FILE>|$dtb_file|g" "$outdir/files/$file"
     done
