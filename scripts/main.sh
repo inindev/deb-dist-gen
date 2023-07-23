@@ -79,12 +79,19 @@ main() {
     echo "$(file_fstab $uuid)\n" > "$mountpt/etc/fstab"
 
     # setup extlinux boot
-    install -Dm 754 'files/dtb_cp.sh' "$mountpt/etc/kernel/postinst.d/dtb_cp.sh"
-    install -Dm 754 'files/dtb_rm.sh' "$mountpt/etc/kernel/postrm.d/dtb_rm.sh"
-    install -Dm 754 'files/mk_extlinux.sh' "$mountpt/boot/mk_extlinux.sh"
-    $disable_ipv6 || sed -i 's/ ipv6.disable=1//' "$mountpt/boot/mk_extlinux.sh"
-    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postinst.d/update_extlinux.sh"
-    ln -svf '../../../boot/mk_extlinux.sh' "$mountpt/etc/kernel/postrm.d/update_extlinux.sh"
+    install -Dm 754 'files/dtb_cp' "$mountpt/etc/kernel/postinst.d/dtb_cp"
+    install -Dm 754 'files/dtb_rm' "$mountpt/etc/kernel/postrm.d/dtb_rm"
+    install -Dm 754 'files/mk_extlinux' "$mountpt/boot/mk_extlinux"
+    $disable_ipv6 || sed -i 's/ ipv6.disable=1//' "$mountpt/boot/mk_extlinux"
+    ln -svf '../../../boot/mk_extlinux' "$mountpt/etc/kernel/postinst.d/update_extlinux"
+    ln -svf '../../../boot/mk_extlinux' "$mountpt/etc/kernel/postrm.d/update_extlinux"
+
+    print_hdr "installing firmware"
+    mkdir -p "$mountpt/usr/lib/firmware"
+    ln -svf 'usr/lib' "$mountpt/lib"
+    local lfwn=$(basename "$lfw")
+    local lfwbn="${lfwn%%.*}"
+    tar -C "$mountpt/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" <FIRMWARE>
 
     # install debian linux from deb packages (debootstrap)
     print_hdr "installing root filesystem from debian.org"
@@ -103,19 +110,9 @@ main() {
     umount "$mountpt/var/cache"
     umount "$mountpt/var/lib/apt/lists"
 
-    print_hdr "installing firmware"
-    mkdir -p "$mountpt/lib/firmware"
-    local lfwn=$(basename "$lfw")
-    local lfwbn="${lfwn%%.*}"
-    tar -C "$mountpt/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" <FIRMWARE>
-
     # apt sources & default locale
     echo "$(file_apt_sources $deb_dist)\n" > "$mountpt/etc/apt/sources.list"
     echo "$(file_locale_cfg)\n" > "$mountpt/etc/default/locale"
-
-    # hostname
-    echo $hostname > "$mountpt/etc/hostname"
-    sed -i "s/127.0.0.1\tlocalhost/127.0.0.1\tlocalhost\n127.0.1.1\t$hostname/" "$mountpt/etc/hosts"
 
     # wpa supplicant
     rm -rf "$mountpt/etc/systemd/system/multi-user.target.wants/wpa_supplicant.service"
@@ -130,6 +127,10 @@ main() {
 
     # motd (off by default)
     is_param 'motd' "$@" && [ -f '../etc/motd' ] && cp -f '../etc/motd' "$mountpt/etc"
+
+    # hostname
+    echo $hostname > "$mountpt/etc/hostname"
+    sed -i "s/127.0.0.1\tlocalhost/127.0.0.1\tlocalhost\n127.0.1.1\t$hostname/" "$mountpt/etc/hosts"
 
     print_hdr "creating user account"
     chroot "$mountpt" /usr/sbin/useradd -m "$acct_uid" -s '/bin/bash'
