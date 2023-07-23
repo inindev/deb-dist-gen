@@ -6,7 +6,8 @@
 set -e
 
 main() {
-    for model in 'r5c' 'r5s'; do
+    local model models='r5c r5s'
+    for model in $models; do
         main_model "$model"
     done
 }
@@ -29,7 +30,7 @@ main_model() {
     rm -rf "$outdir"
     mkdir -p "$outdir/files"
 
-    local scripts='header main disk file_fstab file_apt_sources file_wpa_supplicant_conf file_locale_cfg download is_param check_installed text root_check footer'
+    local script scripts='header main disk file_fstab file_apt_sources file_wpa_supplicant_conf file_locale_cfg download is_param check_installed text root_check footer'
     for script in $scripts; do
         cat "scripts/$script.sh" >> "$outfile"
     done
@@ -37,7 +38,7 @@ main_model() {
     cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' "$outdir/files"
 
     # additional network config
-    sed "/setup for expand fs/e cat files/network_${model}.cfg" 'files/rc.local' > "$outdir/files/rc.local-${model}"
+    sed "/setup for expand fs/e cat files/network_${model}.cfg" 'files/rc.local' > "$outdir/files/rc.local"
 
     # device tree is not in kernel
     sed -i "/setup media/i\    # dtb\n    local dtb=\$(download \"\$cache\" \"\<REL_URL\>/rk3568-nanopi-${model}.dtb\")\n    [ -f \"\$dtb\" ] || { echo \"unable to fetch \$dtb\"; exit 4; }\n" "$outfile"
@@ -45,10 +46,10 @@ main_model() {
 
     process_params "$params" "$outfile"
 
-    # nanopi uboot files are decorated with model name
+    # nanopi uboot and motd files are decorated with model name
     sed -i "s|idbloader.img|idbloader-${model}.img|" "$outfile"
     sed -i "s|u-boot.itb|u-boot-${model}.itb|" "$outfile"
-    sed -i "s|files/rc.local|files/rc.local-${model}|" "$outfile"
+    sed -i "s|\.\./etc/motd|\.\./etc/motd-${model}|g" "$outfile"
 }
 
 process_params() {
@@ -57,6 +58,7 @@ process_params() {
 
     # apply substitutions
     params="$(echo "$params" | sed -e '/^[[:blank:]]*$/d' -e 's/:[[:blank:]]\+/|/')"
+    local param key value
     echo "$params" | while read param; do
         key=$(echo "$param" | sed 's/|.*//')
         val=$(echo "$param" | sed 's/.*|//')
@@ -76,7 +78,7 @@ process_dtb() {
     local outfile="$2"
 
     local outdir="$(dirname "$outfile")"
-    local files='dtb_cp dtb_rm mk_extlinux'
+    local file files='dtb_cp dtb_rm mk_extlinux'
     for file in $files; do
         sed -i "s|<DTB_FILE>|$dtb_file|g" "$outdir/files/$file"
     done
@@ -86,7 +88,7 @@ process_firmware() {
     local fw_files="$1"
     local outfile="$2"
 
-    local fw_list
+    local fw_file fw_list
     for fw_file in $fw_files; do
         fw_list="$fw_list \"\$lfwbn/$fw_file\""
     done

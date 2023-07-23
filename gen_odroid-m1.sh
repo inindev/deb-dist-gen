@@ -21,12 +21,12 @@ main() {
     rm -rf "$outdir"
     mkdir -p "$outdir/files"
 
-    local scripts='header main disk file_fstab file_apt_sources file_wpa_supplicant_conf file_locale_cfg download is_param check_installed text root_check footer'
+    local script scripts='header main disk file_fstab file_apt_sources file_wpa_supplicant_conf file_locale_cfg download is_param check_installed text root_check footer'
     for script in $scripts; do
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' 'files/rc.local' "$outdir/files"
+    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' "$outdir/files"
 
     process_params "$params" "$outfile"
 }
@@ -37,6 +37,7 @@ process_params() {
 
     # apply substitutions
     params="$(echo "$params" | sed -e '/^[[:blank:]]*$/d' -e 's/:[[:blank:]]\+/|/')"
+    local param key value
     echo "$params" | while read param; do
         key=$(echo "$param" | sed 's/|.*//')
         val=$(echo "$param" | sed 's/.*|//')
@@ -56,7 +57,7 @@ process_dtb() {
     local outfile="$2"
 
     local outdir="$(dirname "$outfile")"
-    local files='dtb_cp dtb_rm mk_extlinux'
+    local file files='dtb_cp dtb_rm mk_extlinux'
     for file in $files; do
         sed -i "s|<DTB_FILE>|$dtb_file|g" "$outdir/files/$file"
     done
@@ -66,7 +67,7 @@ process_firmware() {
     local fw_files="$1"
     local outfile="$2"
 
-    local fw_list
+    local fw_file fw_list
     for fw_file in $fw_files; do
         fw_list="$fw_list \"\$lfwbn/$fw_file\""
     done
