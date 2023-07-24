@@ -24,7 +24,7 @@ elif [ -f "${source2}" ]; then
 	echo -n "I: dtb_cp: symlink "
 	ln -sfv "$(basename "${source2}")" "${target}"
 else
-	echo >&2 "E: dtb_cp: neither ${source1} nor ${source2} not found"
+	echo >&2 "E: dtb_cp: neither ${source1} nor ${source2} found"
 	exit 3
 fi
 
