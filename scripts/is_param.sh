@@ -1,12 +1,12 @@
 is_param() {
-    local match
+    local item match
     for item in "$@"; do
         if [ -z "$match" ]; then
             match="$item"
         elif [ "$match" = "$item" ]; then
-            return
+            return 0
         fi
     done
-    false
+    return 1
 }
 

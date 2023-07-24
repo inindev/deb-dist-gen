@@ -73,8 +73,7 @@ mount_media() {
 }
 
 check_mount_only() {
-    local img
-    local flag=false
+    local item img flag=false
     for item in "$@"; do
         case "$item" in
             mount) flag=true ;;
@@ -94,7 +93,7 @@ check_mount_only() {
     fi
 
     if [ "$img" = *.xz ]; then
-        tmp=$(basename "$img" .xz)
+        local tmp=$(basename "$img" .xz)
         if [ -f "$tmp" ]; then
             echo "compressed file ${bld}$img${rst} was specified but uncompressed file ${bld}$tmp${rst} exists..."
             echo -n "mount ${bld}$tmp${rst}"

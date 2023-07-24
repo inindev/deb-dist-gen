@@ -1,6 +1,6 @@
 # check if debian package is installed
 check_installed() {
-    local todo
+    local item todo
     for item in "$@"; do
         dpkg -l "$item" 2>/dev/null | grep -q "ii  $item" || todo="$todo $item"
     done
