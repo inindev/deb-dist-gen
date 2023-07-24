@@ -26,7 +26,7 @@ main() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' "$outdir/files"
+    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' 'files/rc.local' "$outdir/files"
 
     process_params "$params" "$outfile"
 

@@ -88,10 +88,9 @@ main() {
 
     print_hdr "installing firmware"
     mkdir -p "$mountpt/usr/lib/firmware"
-    ln -svf 'usr/lib' "$mountpt/lib"
     local lfwn=$(basename "$lfw")
     local lfwbn="${lfwn%%.*}"
-    tar -C "$mountpt/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" <FIRMWARE>
+    tar -C "$mountpt/usr/lib/firmware" --strip-components=1 --wildcards -xavf "$lfw" <FIRMWARE>
 
     # install debian linux from deb packages (debootstrap)
     print_hdr "installing root filesystem from debian.org"
