@@ -24,7 +24,7 @@ main_model() {
     "
 
     local outdir="target_nanopi-${model}"
-    local outfile="$outdir/make_debian_img_${model}.sh"
+    local outfile="$outdir/make_debian_img.sh"
 
     echo "generating $outdir"
     rm -rf "$outdir"
