@@ -35,10 +35,10 @@ main_model() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' "$outdir/files"
+    cp 'extlinux-menu/dtb_cp' 'extlinux-menu/dtb_rm' 'extlinux-menu/mk_extlinux' "$outdir/files"
 
     # additional network config
-    sed "/setup for expand fs/e cat files/network_${model}.cfg" 'files/rc.local' > "$outdir/files/rc.local"
+    sed "/setup for expand fs/e cat configs/network_${model}.cfg" 'configs/rc.local' > "$outdir/files/rc.local"
 
     # device tree is not in kernel
     sed -i "/setup media/i\    # dtb\n    local dtb=\$(download \"\$cache\" \"\<REL_URL\>/rk3568-nanopi-${model}.dtb\")\n    [ -f \"\$dtb\" ] || { echo \"unable to fetch \$dtb\"; exit 4; }\n" "$outfile"

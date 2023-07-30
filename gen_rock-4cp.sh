@@ -26,11 +26,11 @@ main() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp 'files/dtb_cp' 'files/dtb_rm' 'files/mk_extlinux' 'files/rc.local' "$outdir/files"
+    cp 'extlinux-menu/dtb_cp' 'extlinux-menu/dtb_rm' 'extlinux-menu/mk_extlinux' 'configs/rc.local' "$outdir/files"
 
     # device tree and bluetooth firmware
-    sed -i "/setup media/e cat files/rock-4cp_fw-dtb-1.cfg" "$outfile"
-    sed -i '/xavf "$lfw"/r files/rock-4cp_fw-dtb-2.cfg' "$outfile"
+    sed -i "/setup media/e cat configs/rock-4cp_fw-dtb-1.cfg" "$outfile"
+    sed -i '/xavf "$lfw"/r configs/rock-4cp_fw-dtb-2.cfg' "$outfile"
 
     process_params "$params" "$outfile"
 }

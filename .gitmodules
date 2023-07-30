@@ -1,0 +1,3 @@
+[submodule "extlinux-menu"]
+	path = extlinux-menu
+	url = https://github.com/inindev/extlinux-menu.git
