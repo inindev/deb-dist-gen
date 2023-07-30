@@ -1,6 +1,5 @@
 #!/bin/sh
 
-
 # Copyright (C) 2023, John Clark <inindev@gmail.com>
 
 set -e
@@ -79,5 +78,6 @@ process_firmware() {
 }
 
 
+cd "$(dirname "$(readlink -f "$0")")"
 main "$@"
 

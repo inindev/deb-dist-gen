@@ -30,6 +30,7 @@ main() {
     sed -i "s|<DTS_LINKS>|$dts_links|" "$outfile"
 }
 
+
 cd "$(dirname "$(readlink -f "$0")")"
 main "$@"
 
