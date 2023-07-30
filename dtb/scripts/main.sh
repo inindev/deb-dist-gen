@@ -3,7 +3,7 @@ main() {
     local lxsha='<LINUX_SHA>'
 
     local lf="$(basename "$linux")"
-    local lv="$(echo $lf | sed -nE 's/linux-(.*)\.tar\..z/\1/p')"
+    local lv="$(echo "$lf" | sed -nE 's/linux-(.*)\.tar\..z/\1/p')"
 
     if is_param 'clean' "$@"; then
         rm -f *.dtb *-top.dts
@@ -23,7 +23,7 @@ main() {
     fi
 
     local rkpath="linux-$lv/arch/arm64/boot/dts/rockchip"
-    if [ ! -d "linux-$lv" ]; then
+    if ! [ -d "linux-$lv" ]; then
         tar xavf "$lf" "linux-$lv/include/dt-bindings" "linux-$lv/include/uapi" "$rkpath"
     fi
 
