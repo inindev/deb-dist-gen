@@ -25,7 +25,7 @@ main() {
     sed -i "s|<LINUX_URL>|$linux_url|" "$outfile"
     sed -i "s|<LINUX_SHA>|$linux_sha|" "$outfile"
 
-    local dts_files='rk3568-nanopi-r5s rk3568-nanopi-r5c'
+    local dts_files='rk3568-nanopi-r5c rk3568-nanopi-r5s'
     sed -i "s|<DTS_FILES>|$dts_files|" "$outfile"
 
     local dts_links='rk3568-nanopi-r5s.dts rk3568-nanopi-r5c.dts rk3568-nanopi-r5s.dtsi rk3568.dtsi rk356x.dtsi rk3568-pinctrl.dtsi rockchip-pinconf.dtsi'
