@@ -1,0 +1,1 @@
+../../scripts/is_param.sh
