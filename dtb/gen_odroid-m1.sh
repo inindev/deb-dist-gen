@@ -31,6 +31,6 @@ main() {
 }
 
 
-cd "$(dirname "$(readlink -f "$0")")"
+cd "$(dirname "$(realpath "$0")")"
 main "$@"
 
