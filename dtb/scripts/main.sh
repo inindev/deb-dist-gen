@@ -25,12 +25,12 @@ main() {
     local rkpath="linux-$lv/arch/arm64/boot/dts/rockchip"
     if ! [ -d "linux-$lv" ]; then
         tar xavf "$lf" "linux-$lv/include/dt-bindings" "linux-$lv/include/uapi" "$rkpath"
-    fi
 
-    local patch patches="$(find patches -maxdepth 1 -name '*.patch' 2>/dev/null || true)"
-    for patch in $patches; do
-        patch -p1 -d "linux-$lv" -i "../$patch"
-    done
+        local patch patches="$(find patches -maxdepth 1 -name '*.patch' 2>/dev/null || true)"
+        for patch in $patches; do
+            patch -p1 -d "linux-$lv" -i "../$patch"
+        done
+    fi
 
     if is_param 'links' "$@"; then
         local rkf rkfl='<DTS_LINKS>'
