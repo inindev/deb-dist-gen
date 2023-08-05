@@ -30,6 +30,10 @@ main() {
 
     local dts_links='rk3568-nanopi-r5s.dts rk3568-nanopi-r5c.dts rk3568-nanopi-r5s.dtsi rk3568.dtsi rk356x.dtsi rk3568-pinctrl.dtsi rockchip-pinconf.dtsi'
     sed -i "s|<DTS_LINKS>|$dts_links|" "$outfile"
+
+    sed -i '/cp_to_debian \"/s/$/ \"${dt#*-}\"/' "$outfile"
+    sed -i '/local target/s/$/\n    local dir=\"$2\"/' "$outfile"
+    sed -i 's|../debian/|../debian/$dir/|g' "$outfile"
 }
 
 
