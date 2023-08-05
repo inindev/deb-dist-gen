@@ -25,6 +25,7 @@ main() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
+    [ -f extlinux-menu/mk_extlinux ] || git submodule update --init --recursive
     cp 'extlinux-menu/dtb_cp' 'extlinux-menu/dtb_rm' 'extlinux-menu/mk_extlinux' 'configs/rc.local' "$outdir/files"
 
     process_params "$params" "$outfile"
