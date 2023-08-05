@@ -5,7 +5,7 @@
 set -e
 
 main() {
-    local outdir='target_nanopi-r5'
+    local outdir='../target_nanopi-r5/dtb'
     echo "generating $outdir"
     rm -rf "$outdir"
     mkdir -p "$outdir"

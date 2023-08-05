@@ -1,1 +1,1 @@
-../../scripts/text.sh
+../../debian/scripts/text.sh

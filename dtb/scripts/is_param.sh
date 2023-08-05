@@ -1,1 +1,1 @@
-../../scripts/is_param.sh
+../../debian/scripts/is_param.sh

@@ -5,7 +5,7 @@
 set -e
 
 main() {
-    local outdir='target_rock-4cp'
+    local outdir='../target_rock-4cp/dtb'
     echo "generating $outdir"
     rm -rf "$outdir"
     mkdir -p "$outdir"

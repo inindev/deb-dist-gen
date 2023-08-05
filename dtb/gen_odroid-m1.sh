@@ -5,7 +5,7 @@
 set -e
 
 main() {
-    local outdir='target_odroid-m1'
+    local outdir='../target_odroid-m1/dtb'
     echo "generating $outdir"
     rm -rf "$outdir"
     mkdir -p "$outdir"

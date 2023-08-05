@@ -1,1 +1,1 @@
-../../scripts/check_installed.sh
+../../debian/scripts/check_installed.sh
