@@ -4,6 +4,8 @@
 
 set -e
 
+cd "$(dirname "$(realpath "$0")")"
+
 for s in gen_*.sh; do
     sh "$s"
 done
