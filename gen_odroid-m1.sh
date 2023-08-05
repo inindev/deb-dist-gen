@@ -9,7 +9,7 @@ main() {
       DEB_DIST: bookworm
       HOSTNAME: odroidm1-arm64
       DTB_FILE: rk3568-odroid-m1.dtb
-      REL_URL:  https://github.com/inindev/odroid-m1/releases/download/v12.0
+      REL_URL:  https://github.com/inindev/odroid-m1/releases/download/v12.0.1
       FIRMWARE: rockchip rtl_bt rtl_nic
     '
 

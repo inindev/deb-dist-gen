@@ -18,7 +18,7 @@ main_model() {
       DEB_DIST: bookworm
       HOSTNAME: nanopi-${model}-arm64
       DTB_FILE: rk3568-nanopi-${model}.dtb
-      REL_URL:  https://github.com/inindev/nanopi-r5/releases/download/v12.0
+      REL_URL:  https://github.com/inindev/nanopi-r5/releases/download/v12.0.1
       FIRMWARE: rockchip rtl_nic
     "
 
