@@ -1,3 +1,4 @@
 [submodule "debian/extlinux-menu"]
 	path = debian/extlinux-menu
 	url = https://github.com/inindev/extlinux-menu.git
+	branch = main
