@@ -57,7 +57,7 @@ mount_media() {
         success_msg="partition ${cya}$part${rst} successfully mounted on ${cya}$mountpt${rst}"
     elif [ -f "$media" ]; then
         # hard-coded to p1
-        mount -n -o loop,offset=16M "$media" "$mountpt"
+        mount -no loop,offset=16M "$media" "$mountpt"
         success_msg="media ${cya}$media${rst} partition 1 successfully mounted on ${cya}$mountpt${rst}"
     else
         echo "file not found: $media"
