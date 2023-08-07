@@ -9,7 +9,7 @@ main() {
       DEB_DIST: trixie
       HOSTNAME: rock5b-arm64
       DTB_FILE: rk3588-rock-5b.dtb
-      REL_URL:  https://github.com/inindev/rock-5b/releases/download/v12.0-6.5-rc1
+      REL_URL:  https://github.com/inindev/rock-5b/releases/download/v13-6.5-rc5
       FIRMWARE: microchip/mscc* nvidia/tegra??? r8a779x* rockchip rtl_bt rtl_nic
     '
 
