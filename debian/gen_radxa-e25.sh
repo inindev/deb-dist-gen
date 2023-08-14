@@ -28,6 +28,10 @@ main() {
     [ -f extlinux-menu/mk_extlinux ] || git submodule update --init --recursive
     cp 'extlinux-menu/dtb_cp' 'extlinux-menu/dtb_rm' 'extlinux-menu/mk_extlinux' 'configs/rc.local' "$outdir/files"
 
+    # device tree is not in kernel
+    sed -i "/setup media/i\    # dtb\n    local dtb=\$(download \"\$cache\" \"\<REL_URL\>/rk3568-radxa-e25.dtb\")\n    [ -f \"\$dtb\" ] || { echo \"unable to fetch \$dtb\"; exit 4; }\n" "$outfile"
+    sed -i '/linux from deb packages/i\    # install device tree\n    install -vm 644 \"\$dtb\" \"\$mountpt/boot\"\n' "$outfile"
+
     process_params "$params" "$outfile"
 }
 
