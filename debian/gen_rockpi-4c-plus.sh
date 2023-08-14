@@ -13,7 +13,7 @@ main() {
       FIRMWARE: rockchip rtl_nic brcm/brcmfmac43455-sdio.AW-CM256SM.txt cypress/cyfmac43455-sdio.*
     '
 
-    local outdir='../target_rock-4cp/debian'
+    local outdir='../target_rockpi-4c-plus/debian'
     local outfile="$outdir/make_debian_img.sh"
 
     echo "generating $outdir"
