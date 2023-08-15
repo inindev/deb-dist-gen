@@ -28,9 +28,6 @@ main() {
 
     local dts_links='rk3568-radxa-e25.dts rk3568-radxa-cm3i.dtsi rk3568.dtsi rk356x.dtsi rk3568-pinctrl.dtsi rockchip-pinconf.dtsi'
     sed -i "s|<DTS_LINKS>|$dts_links|" "$outfile"
-
-    # no patches to apply
-    sed -i '/dt-bindings/,/done/{/dt-bindings/!d}' "$outfile"
 }
 
 
