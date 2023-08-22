@@ -8,7 +8,7 @@ main() {
     local params='
       DEB_DIST: bookworm
       HOSTNAME: rock4cp-arm64
-      DTB_FILE: rk3399-rock-pi-4c-plus.dtb
+      DTB_FILE: rk3399-rock-4c-plus.dtb
       REL_URL:  https://github.com/inindev/rockpi-4c-plus/releases/download/v12.0
       FIRMWARE: rockchip rtl_nic brcm/brcmfmac43455-sdio.AW-CM256SM.txt cypress/cyfmac43455-sdio.*
     '
