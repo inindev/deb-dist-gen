@@ -16,8 +16,6 @@ main() {
         cat "scripts/$script.sh" >> "$outfile"
     done
 
-    cp -r 'patches_nanopi-r5' "$outdir/patches"
-
     local linux_latest="$(wget -qO - 'https://cdn.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc' | grep 'linux.*tar\.xz' | sort -Vk2 | tail -n1)"
     local linux_txz="${linux_latest#*  }"
     local linux_url="https://cdn.kernel.org/pub/linux/kernel/v6.x/$linux_txz"
