@@ -29,6 +29,10 @@ main() {
 
     process_params "$params" "$outfile"
 
+    # update firmware to 20230515
+    sed -i 's/linux-firmware-20230210/linux-firmware-20230515/' "$outfile"
+    sed -i 's/6e3d9e8d52cffc4ec0dbe8533a8445328e0524a20f159a5b61c2706f983ce38a/8b1acfa16f1ee94732a6acb50d9d6c835cf53af11068bd89ed207bbe04a1e951/' "$outfile"
+
     # remove the kernel by substituting it with initramfs-tools
     sed -i 's/linux-image-arm64/initramfs-tools/' "$outfile"
 }
