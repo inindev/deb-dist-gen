@@ -10,7 +10,7 @@ main() {
       HOSTNAME: nanopc-t6-arm64
       DTB_FILE: rk3588-nanopc-t6.dtb
       REL_URL:  https://github.com/inindev/nanopc-t6/releases/download/v13-6.5-rc5
-      FIRMWARE: microchip/mscc* nvidia/tegra??? r8a779x* rockchip rtl_bt rtl_nic
+      FIRMWARE: microchip/mscc* nvidia/tegra??? r8a779x* rockchip rtl_bt rtl_nic rtlwifi rtw88
     '
 
     local outdir='../target_nanopc-t6/debian'
